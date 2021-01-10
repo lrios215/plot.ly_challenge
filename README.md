@@ -1,5 +1,5 @@
 
-# Plot.ly Challenge - [Belly Button Biodiversity](https://lrios215.github.io/plot.ly_challenge/StarterCode/index.html/)
+# Plot.ly Challenge - [Belly Button Biodiversity](https://lrios215.github.io/plot.ly_challenge/StarterCode/index.html)
 
 This interactive dashboard explores the [Belly Button Biodiversity dataset](http://robdunnlab.com/projects/belly-button-biodiversity/), which catalogs the microbes that colonize human navels.
 
