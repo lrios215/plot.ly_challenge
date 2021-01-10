@@ -13,18 +13,16 @@ Plotly was used to create an interactive dashboard that uses the D3 library, dat
 ## Interactive Dashboard Features:
 
 * A dropdown menu that: displays the sample metadata: an individual's demographic information and each key-value pair from the metadata JSON object.
-<dropdownchart image>
+![Dropdown Menu Displaying Demographic Information](images/dropdown.png)
 
-* The horizontal bar chart with a dropdown menu displays the top 10 OTUs found in each individual, when one hovers over each bar the bacteria names will appear.
-<bubble chart image>
+* The horizontal bar chart that displays the top 10 OTUs found in each individual, when one hovers over each bar the bacteria names will appear.
+![Bar Chart](images/barplot.png)
 
-* The bubble chart displays each sample.
-
-<bubble chart image>
+* The bubble chart displays each sample, the size of the bubble is represented by the amount of bacteria per id
+![Bubble Chart](images/bubble_chart.png)
 
 * Gauge Chart that shows the weekly washing frequency of the individual.
-
-<Gauge chart image>
+![Gauge Chart](images/gauge.png)
 
 * All plots and metadata updates each time a new sample is selected.
 
