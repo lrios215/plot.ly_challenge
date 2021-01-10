@@ -48,97 +48,103 @@ function makePlot(testId){
 Plotly.newPlot('bar', layout, [trace]);
 
 //3. Create a bubble chart that displays each sample.
-// * Use `otu_ids` for the x values.
-// * Use `sample_values` for the y values.
-// * Use `sample_values` for the marker size.
-// * Use `otu_ids` for the marker colors.
-// * Use `otu_labels` for the text values.
-            var otuValue = samples.map(function (row) {
-                    return row.sample_values;
-                });
-            var otuValue = otuValue[bact_test];
-            var otuId = samples.map(function (row) {
-                    return row.otu_ids;
-                });
-            var otuId = otuId[bact_test];
-            var otuLabel = samples.map(function (row) {
-                    return row.otu_labels;
-                });
-            var otuLabel = otuLabel[bact_test];
-            var minIds = d3.min(otuId);
-            var maxIds = d3.max(otuId);
-            var mapNr = d3.scaleLinear().domain([minIds, maxIds]).range([0, 1]);
-            var bubbleColors = otuId.map(function (val) {
-                    return d3.interpolateRgbBasis(["royalblue", "greenyellow", "goldenrod"])(mapNr(val));
-                });
-            var trace1 = {
-                x: otuId,
-                y: otuValue,
-                text: otuLabel,
-                mode: 'markers',
-                marker: {
-                    color: bubbleColors,
-                    size: otuValue.map(function (x) {
-                            return x * 10;
-                        }),
-                    sizemode: 'area'
+        var otu_amt = samples.map(function (row) {
+            // * Use `sample_values` for the y values.
+            // * Use `sample_values` for the marker size.
+            return row.sample_values;
+            });
+        var otu_amt = otu_amt[bact_test];
+        var otu_id = samples.map(function (row) {
+            // * Use `otu_ids` for the x values.    
+            return row.otu_ids;
+            });
+        var otu_id = otu_id[bact_test];
+        var otu_name = samples.map(function (row) {
+            // * Use `otu_labels` for the text values.
+            return row.otu_labels;
+            });
+        var otu_name = otu_name[bact_test];
+        var minIds = d3.min(otu_id);
+        var maxIds = d3.max(otu_id);
+        var mapNr = d3.scaleLinear().domain([minIds, maxIds]).range([0, 1]);
+        // * Use `otu_ids` for the marker colors.
+        var bubbleColors = otu_id.map(function (val) {
+            return d3.interpolateRgbBasis(["green", "orange", "blue"])(mapNr(val));
+            });
+        var trace1 = {
+            x: otu_id,
+            y: otu_amt,
+            text: otu_name,
+            mode: 'markers',
+            marker: {
+                color: bubbleColors,
+                size: otu_amt.map(function (x) {
+                    return x * 10;
+                    }),
+                sizemode: 'area'
                 }
             };
-            var data1 = [trace1];
-            var bubbleLayout = {
-                xaxis: {
-                    autochange: true,
-                    height: 600,
-                    width: 1000,
-                    title: {
-                        text: 'OTU ID'
-                    }
+        var data1 = [trace1];
+        var bubbleLayout = {
+            xaxis: {
+                autochange: true,
+                height: 600,
+                width: 1000,
+                title: {text: 'OTU ID'}
                 },
             };
-            Plotly.newPlot('bubble', data1, bubbleLayout);
+    Plotly.newPlot('bubble', data1, bubbleLayout);
 
-            // 4. Display the sample metadata, i.e., an individual's demographic information.
-            // 5. Display each key-value pair from the metadata JSON object somewhere on the page.
-            //6. Update all of the plots any time that a new sample is selected.
-            // append ids to the dropdown
-            //BONUS: make gauge chart
-            var meta = data.metadata;
-            var data2 = [
-                {
-                    domain: { x: [0, 1], y: [0, 1] },
-                    value: meta[bact_test].wfreq,
-                    title: { text: "Washing frequency" },
-                    type: "indicator",
-                    mode: "gauge+number",
-                    gauge: {
-                        axis: { range: [null, 9] },
-                        bar: { color: 'orange' },
-                        steps: [
-                            { range: [0, 2], color: "rgba(14, 127, 0, .5)" },
-                            { range: [2, 3], color: "rgba(110, 154, 22, .5)" },
-                            { range: [3, 4], color: "rgba(170, 202, 42, .5)" },
-                            { range: [4, 5], color: "rgba(202, 209, 95, .5)" },
-                            { range: [5, 6], color: "rgba(210, 206, 145, .5)" },
-                            { range: [6, 8], color: "rgba(232, 226, 202, .5)" },
-                            { range: [8, 9], color: "rgba(255, 255, 255, 0)" }
-                        ]
-                    }
+// 4. Display the sample metadata, i.e., an individual's demographic information.
+// 5. Display each key-value pair from the metadata JSON object somewhere on the page.
+//6. Update all of the plots any time that a new sample is selected.
+// append ids to the dropdown
+
+//BONUS: make gauge chart
+        var meta = data.metadata;
+        var data2 = [
+            {domain: { x: [0, 1], y: [0, 1] },
+            value: meta[bact_test].wfreq,
+            title: { text: "Belly Button Washing Frequency: Scrubs Per Week" },
+            type: "indicator",
+            mode: "gauge+number",
+                gauge: {
+                axis: { range: [null, 9] },
+                bar: { color: "darkblue" },
+                steps: [
+                        { range: [0, 2], color: "rgb(165,0,38)" },
+                        { range: [2, 3], color: "rgba(110, 154, 22, .5)" },
+                        { range: [3, 4], color: "rgba(170, 202, 42, .5)" },
+                        { range: [4, 5], color: "rgba(202, 209, 95, .5)" },
+                        { range: [5, 6], color: "rgba(210, 206, 145, .5)" },
+                        { range: [6, 8], color: "rgba(232, 226, 202, .5)" },
+                        { range: [8, 9], color: "rgba(255, 255, 255, 0)" }
+                        ],
+                threshold: {
+                    line: {color: "red", width: 4},
+                    thickness: 0.75,
+                    value: 8.75
+                }
+                }
                 }
             ];
 
-            var gaugeLayout = { width: 600, height: 500 };
-            Plotly.newPlot('gauge', data2, gaugeLayout);
-            // display meta info
-            var metadata = d3.select('#sample-metadata');
-            metadata.html('');
-            Object.entries(meta[bact_test]).forEach(function ([k, v]) {
-                    metadata.append('p').text(`${k.toUpperCase()}:\n${v}`);
-                });
+        var layout = {width: 800, height: 500};
+        
+        Plotly.newPlot('gauge', data2, layout);
+        
+// display metadata info
+var metadata = d3.select('#sample-metadata');
+
+metadata.html('');
+
+Object.entries(meta[bact_test]).forEach(function ([k, v]) {
+    metadata.append('p').text(`${k.toUpperCase()}:\n${v}`);
+            });
         })
 }
 
-// Submit Button handler
+// Submit Button handler and Select the input value from the form
 function optionChanged(newId) {
-    // Select the input value from the form
-    makePlot(newId);
-}
+    makePlot(newId)
+};
