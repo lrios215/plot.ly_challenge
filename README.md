@@ -8,6 +8,7 @@ The dataset reveals that a small handful of microbial species (also called opera
 ## Step 1: Plotly and D3
 
 Plotly was used to create an interactive dashboard that uses the D3 library, data is a JSON object.
+![Interactive Dashboard](images/dashboard.png)
 
 ## Interactive Dashboard Features:
 

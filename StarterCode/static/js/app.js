@@ -6,7 +6,7 @@ d3.json('samples.json').then(function (data) {
         console.log(data.metadata);
         var select_data = d3.selectAll('#selDataset');
         Object.entries(info).forEach(function ([i, v]) {
-                select_data.append('option').text(v);
+                select_data.append('option').text(v)
             });
     })
 //2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
@@ -40,12 +40,12 @@ function makePlot(testId){
             text: otu_labels,
             type: 'bar',
             orientation: 'h'
-            };
+            }
         var layout = {
-            title: `Top 10 OTUs for ${id}`
+            title: "Top 10 OTUs in Each Individual"
         };
 
-Plotly.newPlot('bar', layout, [trace]);
+Plotly.newPlot('bar', [trace], layout);
 
 //3. Create a bubble chart that displays each sample.
         var otu_amt = samples.map(function (row) {
@@ -85,7 +85,7 @@ Plotly.newPlot('bar', layout, [trace]);
                 }
             };
         var data1 = [trace1];
-        var bubbleLayout = {
+        var bubble_layout = {
             xaxis: {
                 autochange: true,
                 height: 600,
@@ -93,14 +93,9 @@ Plotly.newPlot('bar', layout, [trace]);
                 title: {text: 'OTU ID'}
                 },
             };
-    Plotly.newPlot('bubble', data1, bubbleLayout);
+    Plotly.newPlot('bubble', data1, bubble_layout);
 
-// 4. Display the sample metadata, i.e., an individual's demographic information.
-// 5. Display each key-value pair from the metadata JSON object somewhere on the page.
-//6. Update all of the plots any time that a new sample is selected.
-// append ids to the dropdown
-
-//BONUS: make gauge chart
+//BONUS: Gauge chart
         var meta = data.metadata;
         var data2 = [
             {domain: { x: [0, 1], y: [0, 1] },
@@ -109,16 +104,16 @@ Plotly.newPlot('bar', layout, [trace]);
             type: "indicator",
             mode: "gauge+number",
                 gauge: {
-                axis: { range: [null, 9] },
-                bar: { color: "darkblue" },
+                axis: {range: [null, 9] },
+                bar: {color: "darkblue" },
                 steps: [
                         { range: [0, 2], color: "rgb(165,0,38)" },
-                        { range: [2, 3], color: "rgba(110, 154, 22, .5)" },
-                        { range: [3, 4], color: "rgba(170, 202, 42, .5)" },
-                        { range: [4, 5], color: "rgba(202, 209, 95, .5)" },
-                        { range: [5, 6], color: "rgba(210, 206, 145, .5)" },
-                        { range: [6, 8], color: "rgba(232, 226, 202, .5)" },
-                        { range: [8, 9], color: "rgba(255, 255, 255, 0)" }
+                        { range: [2, 3], color: "rgb(215,48,39)" },
+                        { range: [3, 4], color: "rgb(244,109,67)" },
+                        { range: [4, 5], color: "rgb(253,174,97)" },
+                        { range: [5, 6], color: "rgb(254,224,144)" },
+                        { range: [6, 8], color: "rgb(224,243,248)" },
+                        { range: [8, 9], color: "rgb(171,217,233)" }
                         ],
                 threshold: {
                     line: {color: "red", width: 4},
@@ -133,7 +128,10 @@ Plotly.newPlot('bar', layout, [trace]);
         
         Plotly.newPlot('gauge', data2, layout);
         
-// display metadata info
+// 4. Display the sample metadata, i.e., an individual's demographic information.
+// 5. Display each key-value pair from the metadata JSON object somewhere on the page.
+//6. Update all of the plots any time that a new sample is selected.
+// append ids to the dropdown
 var metadata = d3.select('#sample-metadata');
 
 metadata.html('');
